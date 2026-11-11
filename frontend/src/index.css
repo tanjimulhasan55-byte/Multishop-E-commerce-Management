@@ -1,0 +1,156 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+ * Design tokens. Everything in the UI is built from these.
+ * ------------------------------------------------------------------ */
+@theme {
+  --font-sans: 'Inter', 'Hind Siliguri', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Brand: indigo → violet */
+  --color-brand-50: oklch(0.97 0.016 277);
+  --color-brand-100: oklch(0.94 0.033 277);
+  --color-brand-200: oklch(0.88 0.06 278);
+  --color-brand-300: oklch(0.79 0.1 279);
+  --color-brand-400: oklch(0.68 0.16 280);
+  --color-brand-500: oklch(0.585 0.215 281);
+  --color-brand-600: oklch(0.52 0.235 282);
+  --color-brand-700: oklch(0.46 0.215 283);
+  --color-brand-800: oklch(0.39 0.18 284);
+  --color-brand-900: oklch(0.33 0.14 285);
+  --color-accent-500: oklch(0.6 0.22 300);
+
+  /* Neutrals (semantic) */
+  --color-canvas: oklch(0.985 0.002 270);
+  --color-surface: oklch(1 0 0);
+  --color-subtle: oklch(0.965 0.004 270);
+  --color-line: oklch(0.92 0.005 270);
+  --color-line-strong: oklch(0.86 0.008 270);
+  --color-ink: oklch(0.2 0.015 270);
+  --color-ink-soft: oklch(0.37 0.015 270);
+  --color-muted: oklch(0.53 0.014 270);
+  --color-faint: oklch(0.68 0.01 270);
+
+  /* Status */
+  --color-success-50: oklch(0.97 0.03 160);
+  --color-success-600: oklch(0.56 0.13 160);
+  --color-success-700: oklch(0.48 0.11 160);
+  --color-warning-50: oklch(0.98 0.04 85);
+  --color-warning-600: oklch(0.66 0.15 70);
+  --color-warning-700: oklch(0.52 0.13 60);
+  --color-danger-50: oklch(0.97 0.02 25);
+  --color-danger-500: oklch(0.63 0.21 25);
+  --color-danger-600: oklch(0.56 0.22 25);
+  --color-danger-700: oklch(0.48 0.19 25);
+  --color-info-50: oklch(0.97 0.02 240);
+  --color-info-600: oklch(0.55 0.15 245);
+
+  /* Radii */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+
+  /* Elevation */
+  --shadow-xs: 0 1px 2px 0 rgb(16 24 40 / 0.04);
+  --shadow-card: 0 1px 2px rgb(16 24 40 / 0.04), 0 1px 3px rgb(16 24 40 / 0.06);
+  --shadow-raised: 0 4px 6px -2px rgb(16 24 40 / 0.04), 0 12px 24px -6px rgb(16 24 40 / 0.1);
+  --shadow-pop: 0 20px 48px -12px rgb(16 24 40 / 0.22), 0 4px 12px -4px rgb(16 24 40 / 0.08);
+  --shadow-focus: 0 0 0 4px oklch(0.585 0.215 281 / 0.18);
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-fade-in: fade-in 160ms var(--ease-out-soft);
+  --animate-scale-in: scale-in 180ms var(--ease-out-soft);
+  --animate-slide-in-right: slide-in-right 220ms var(--ease-out-soft);
+  --animate-slide-in-left: slide-in-left 220ms var(--ease-out-soft);
+  --animate-shimmer: shimmer 1.4s ease-in-out infinite;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes scale-in {
+    from { opacity: 0; transform: translateY(6px) scale(0.985); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes slide-in-right {
+    from { transform: translateX(100%); }
+    to { transform: none; }
+  }
+  @keyframes slide-in-left {
+    from { transform: translateX(-100%); }
+    to { transform: none; }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+}
+
+/* ------------------------------------------------------------------
+ * Base
+ * ------------------------------------------------------------------ */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  body {
+    @apply bg-canvas text-ink font-sans text-[0.9375rem] leading-relaxed;
+  }
+  h1, h2, h3, h4 {
+    @apply text-ink font-semibold tracking-tight;
+  }
+  ::selection {
+    @apply bg-brand-100 text-brand-900;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+    border-radius: 0.375rem;
+  }
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: none;
+  }
+}
+
+@utility container-page {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility skeleton {
+  background: linear-gradient(90deg, var(--color-subtle) 25%, var(--color-line) 50%, var(--color-subtle) 75%);
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}

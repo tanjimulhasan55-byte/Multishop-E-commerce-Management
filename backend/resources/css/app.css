@@ -1,0 +1,95 @@
+@import 'tom-select/dist/css/tom-select.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html { -webkit-font-smoothing: antialiased; }
+    [x-cloak] { display: none !important; }
+}
+
+@layer components {
+    /* ---------- Buttons ---------- */
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition
+               focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+    }
+    .btn-primary { @apply btn bg-brand-600 text-white shadow-sm hover:bg-brand-700 focus-visible:ring-brand-500; }
+    .btn-secondary { @apply btn bg-white text-slate-700 ring-1 ring-inset ring-slate-200 hover:bg-slate-50 focus-visible:ring-brand-500; }
+    .btn-danger { @apply btn bg-rose-600 text-white shadow-sm hover:bg-rose-700 focus-visible:ring-rose-500; }
+    .btn-ghost { @apply btn text-slate-600 hover:bg-slate-100; }
+    .btn-sm { @apply px-3 py-1.5 text-xs rounded-lg; }
+    .btn-icon {
+        @apply inline-flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 transition hover:bg-slate-100 hover:text-slate-900;
+    }
+    .btn-icon-danger { @apply btn-icon hover:bg-rose-50 hover:text-rose-600; }
+
+    /* ---------- Forms ---------- */
+    .form-label { @apply mb-1.5 block text-sm font-medium text-slate-700; }
+    .form-input {
+        @apply block w-full rounded-xl border-0 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm ring-1 ring-inset ring-slate-200
+               placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-brand-500;
+    }
+    .form-input.is-invalid { @apply ring-rose-300 focus:ring-rose-500; }
+    .form-hint { @apply mt-1.5 text-xs text-slate-500; }
+    .form-error { @apply mt-1.5 text-xs font-medium text-rose-600; }
+    .form-checkbox { @apply h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500; }
+
+    /* ---------- Cards ---------- */
+    .card { @apply rounded-2xl bg-white shadow-card; }
+    .card-header { @apply flex items-center justify-between gap-4 border-b border-slate-100 px-6 py-4; }
+    .card-title { @apply text-base font-semibold text-slate-900; }
+    .card-body { @apply p-6; }
+
+    /* ---------- Badges ---------- */
+    .badge { @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium ring-1 ring-inset; }
+
+    /* ---------- Sidebar ---------- */
+    .nav-section { @apply px-3 pb-2 pt-6 text-[11px] font-semibold uppercase tracking-wider text-slate-500; }
+    .nav-link {
+        @apply flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium text-slate-400 transition hover:bg-white/5 hover:text-white;
+    }
+    .nav-link.active { @apply bg-gradient-to-r from-brand-600/90 to-violet-600/80 text-white shadow-lg shadow-brand-900/30; }
+    .nav-link svg { @apply h-5 w-5 shrink-0 opacity-80; }
+    .nav-link:hover svg { @apply opacity-100; }
+}
+
+/* ---------- DataTables (server-side via yajra) restyled to match ---------- */
+div.dt-container { @apply text-sm text-slate-700; }
+div.dt-container .dt-layout-row { @apply flex flex-wrap items-center justify-between gap-3 px-6 py-3; }
+div.dt-container .dt-layout-row.dt-layout-table { @apply block overflow-x-auto px-0 py-0; }
+div.dt-container .dt-search input,
+div.dt-container .dt-length select {
+    @apply rounded-xl border-0 bg-white py-2 text-sm shadow-sm ring-1 ring-inset ring-slate-200 focus:ring-2 focus:ring-brand-500;
+}
+div.dt-container .dt-search input { @apply ml-2 w-64 px-3.5; }
+div.dt-container .dt-length select { @apply mr-2 pl-3 pr-8; }
+div.dt-container .dt-search label, div.dt-container .dt-length label { @apply text-slate-500; }
+table.dataTable { @apply w-full border-collapse; }
+table.dataTable thead th {
+    @apply border-y border-slate-100 bg-slate-50/80 px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500;
+}
+table.dataTable tbody td { @apply border-b border-slate-100 px-6 py-3.5 align-middle; }
+table.dataTable tbody tr { @apply transition-colors hover:bg-slate-50/70; }
+table.dataTable.no-footer { @apply border-b-0; }
+div.dt-container .dt-info { @apply text-slate-500; }
+div.dt-container .dt-paging .dt-paging-button {
+    @apply mx-0.5 inline-flex min-w-[2.25rem] items-center justify-center rounded-lg border-0 px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100 !important;
+    background: none !important;
+}
+div.dt-container .dt-paging .dt-paging-button.current { @apply bg-brand-600 text-white !important; background: #4f46e5 !important; }
+div.dt-container .dt-paging .dt-paging-button.disabled { @apply opacity-40 !important; }
+div.dt-container .dt-processing {
+    @apply rounded-xl bg-white/90 px-4 py-2 text-sm font-medium text-slate-600 shadow-card;
+}
+div.dt-container .dt-processing > div:last-child { display: none; }
+table.dataTable th.dt-type-numeric, table.dataTable td.dt-type-numeric { text-align: left; }
+table.dataTable thead > tr > th.dt-orderable-asc span.dt-column-order,
+table.dataTable thead > tr > th.dt-orderable-desc span.dt-column-order { @apply opacity-60; }
+
+/* Tom Select polish */
+.ts-wrapper .ts-control { @apply rounded-xl border-0 px-3 py-2 shadow-sm ring-1 ring-inset ring-slate-200; }
+.ts-wrapper.focus .ts-control { @apply ring-2 ring-brand-500; box-shadow: none; }
+.ts-wrapper.multi .ts-control > div { @apply rounded-md bg-brand-50 text-brand-700; }
+.ts-dropdown { @apply rounded-xl border-slate-200 shadow-card; }
